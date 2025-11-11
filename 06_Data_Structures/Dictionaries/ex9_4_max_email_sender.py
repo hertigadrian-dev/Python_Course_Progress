@@ -2,7 +2,7 @@
 # Author: Hertig Adrian
 # Description: Reads mbox-short.txt, extracts email addresses from 'From ' lines,
 # and finds which address appears most often.
-# Source: Python for Everybody (Chapter 9)
+# Source: Python Data Structures (Chapter 9)
 # Date: 2025-11-11
 
 
