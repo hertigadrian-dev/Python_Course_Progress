@@ -68,7 +68,7 @@ def main():
 				print(f'x={x:.2f}')
 
 			again = input('Do you want to solve another equation? (yes/no)').strip().lower()
-			if again != 'yes':
+			if not again.startswith('y'):
 				print('Goodby')
 				break
 				
