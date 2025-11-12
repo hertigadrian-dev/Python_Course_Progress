@@ -1,12 +1,12 @@
 ''' Extracting Data'''
 
-# import re
-# hand = open('mbox-short.txt')
-# for line in hand:
-# 	line = line.rstrip()
+import re
+hand = open('mbox-short.txt')
+for line in hand:
+	line = line.rstrip()
 
-# 	if re.search('ˆFrom:', line):
-# 		print(line)
+	if re.search('ˆFrom:', line):
+		print(line)
 
 #-----------------
 
@@ -14,38 +14,38 @@
 
 # ex:
 
-# import re 
-# x = 'My favorite 2 numbers are 19 and 42'
-# y = re.findall('[0-9]+', x)
-# print(y)
+import re 
+x = 'My favorite 2 numbers are 19 and 42'
+y = re.findall('[0-9]+', x)
+print(y)
 
 #----------------
 # ex:
 
-# import re
-# x = 'From: Using the : character'
-# y = re.findall('^F.+?:', x) # starting with F, (.+)-any caracter, (?)-don't be greedy(not greedy prefer the shortest)
-# y = re.findall('^F.+:', x) # starting with F, (.+) any caracter and be greedy(be greedy prefer the longest)
-# print(y)
+import re
+x = 'From: Using the : character'
+y = re.findall('^F.+?:', x) # starting with F, (.+)-any caracter, (?)-don't be greedy(not greedy prefer the shortest)
+y = re.findall('^F.+:', x) # starting with F, (.+) any caracter and be greedy(be greedy prefer the longest)
+print(y)
 
 #--------------------------------------
 
 # ex:
 
-# import re
-# file = input('insert file name:')
-# if len(file) < 3:
-# 	file = 'mbox-short.txt'
+import re
+file = input('insert file name:')
+if len(file) < 3:
+	file = 'mbox-short.txt'
 
-# filename = open(file)
+filename = open(file)
 
-# for y in filename:
-# 	if not y.startswith('From '):
-# 		continue
-# 	y = y.strip()
-# 	# print(y)
-# 	y = re.findall(r'^From (\S+@\S+)', y) # The r tells Python: “Treat this string literally — don’t interpret \S as an escape sequence.”
-# 	print(y)
+for y in filename:
+	if not y.startswith('From '):
+		continue
+	y = y.strip()
+	# print(y)
+	y = re.findall(r'^From (\S+@\S+)', y) # The r tells Python: “Treat this string literally — don’t interpret \S as an escape sequence.”
+	print(y)
 
 #-------------------------------------
 
