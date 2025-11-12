@@ -34,15 +34,16 @@ for line in filename:
 	line = line.strip()
 	line = line.split()
 	
-	hour = line[5].split(':')[0]
-	# first = hour.split(':')
-	# second = first[0]
+	hour = line[5] #.split(':')[0]
+	first = hour.split(':')
+	second = first[0]
 	# print(second)
 
-	adri[hour] = adri.get(hour, 0) + 1
+	adri[second] = adri.get(second, 0) + 1
 	# print(adri)
 handle = list(adri.items())
 # print(handle)
 
-for key, value in adri.items():
+for key, value in sorted(adri.items()):
 	print(key, value)
+		

@@ -17,36 +17,68 @@ the most prolific committer. '''
 
 
 
-# name = input('insert file name:')
+name = input('insert file name:')
 
-# if len(name) < 1:
-# 	name = 'mbox-short.txt'
+if len(name) < 1:
+	name = 'mbox-short.txt'
 
-# filename = open(name)
+filename = open(name)
 
-# adi = dict()
+adi = dict()
 
-# for line in filename:
-# 	line = line.rstrip()
+for line in filename:
+	line = line.rstrip()
 
-# 	if not line.startswith('From'):
-# 		continue
+	if not line.startswith('From'):
+		continue
 
-# 	word = line.split()
-# 	# print (word)
+	word = line.split()
+	# print (word)
 
-# 	extr = f'{word[1]}'
-# 	# print(extr)
+	extr = f'{word[1]}'
+	# print(extr)
 
-# 	adi[extr]=adi.get(extr, 0) + 1
-# 	# print(adi)
+	adi[extr]=adi.get(extr, 0) + 1
+	# print(adi)
 
-# nr_email=None
+nr_email=None
 
-# nr_email = max(adi, key=adi.get)
-# print(nr_email, adi[nr_email])
+nr_email = max(adi, key=adi.get)
+print(nr_email, adi[nr_email])
+
 #------------------------------------------------
 
+''' Playing around: '''
+
+file = input('insert file name:')
+if len(file) < 3:
+	file = 'mbox-short.txt'
+
+filename = open(file)
+
+adri = {}
+
+for line in filename:
+	if not line.startswith('From '):
+		continue
+	line = line.rstrip()
+	line = line.split()
+	# print(line)
+
+	word = line[1].split('@')[1].split('.')[0]
+	# print(word)
+
+	adri[word] = adri.get(word, 0) + 1
+	# print(adri) 
+	
+word_max = max(adri, key=adri.get)
+print(word_max, adri[word_max])
+
+
+
+
+
+#-----------------------------------------------
 # Actually the same thing:
 
 file = input('insert file name:')
@@ -80,36 +112,35 @@ print(nr_email, adri[nr_email])
 
 
 
-
-
-#-----------------------------------------
+#--------------------------------
 
 ''' Playing around: '''
 
-# adi = ['The apple is green','The cherries are reds', 'The melon is yellow', 'The apple is green', 'peach','cherry','orange juce for clients', 'apple']
-# anc = ['red is a color','blue is my car ', 'red color is my flag']
-# tot = adi + anc
 
-# blue = {}
-# for line in tot:
-# 	blue[line] = blue.get(line, 0) + 1
-# 	# print(blue)
-# for key, value in sorted(blue.items(), reverse=True):
-# 	print(value, key)
+adi = ['The apple is green','The cherries are reds', 'The melon is yellow', 'The apple is green', 'peach','cherry','orange juce for clients', 'apple']
+anc = ['red is a color','blue is my car ', 'red color is my flag']
+tot = adi + anc
+
+blue = {}
+for line in tot:
+	blue[line] = blue.get(line, 0) + 1
+	# print(blue)
+for key, value in sorted(blue.items(), reverse=True):
+	print(value, key)
 
 #---------------------------------------	
 
-# blue = {'apple': 2, 'banana': 1, 'cherry': 3}
-# w = list(blue.items())
-# print(w[0][0])
+blue = {'apple': 2, 'banana': 1, 'cherry': 3}
+w = list(blue.items())
+print(w[0][0])
 
-# my_list = ['apple', 2, 'banana', 1, 'cherry', 3]
+my_list = ['apple', 2, 'banana', 1, 'cherry', 3]
 
-# blue = {}
+blue = {}
 
-# for line in my_list:
-# 	blue[line] = blue.get(line, 0) + 1
-# 	print(blue)
+for line in my_list:
+	blue[line] = blue.get(line, 0) + 1
+	print(blue)
 
 
 
