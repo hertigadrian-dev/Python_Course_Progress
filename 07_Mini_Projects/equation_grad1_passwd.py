@@ -11,7 +11,8 @@ def password():
 			print('Password wrong!')
 			tries += 1
 		else:
-			print('Welcome!')
+			print('Let\'s go on !')
+			print('-------------------------------')
 			return True
 	else:
 		print('your tries are up!')
