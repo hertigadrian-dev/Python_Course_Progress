@@ -1,12 +1,14 @@
 
+import getpass
+
 def password():
 	passwd = 'lol123'
 	tries = 0
 
 	while tries < 3:
-		ques = input('insert your password:')
+		ques = getpass.getpass('insert your password:').strip()
 		if ques != passwd:
-			print('password wrong!')
+			print('Password wrong!')
 			tries += 1
 		else:
 			print('Welcome!')
@@ -16,6 +18,7 @@ def password():
 		return False
 
 def access_level():
+	''' Grants access to level 2 if password is correct. '''
 	level = password()
 	if level:
 		print('Welcome to level 2 !')
@@ -25,17 +28,20 @@ def access_level():
 	else:
 		print('\nAccess denied, try later!')
 
-''' We solve equation ax + b = c '''
+
 
 def solve_equation(a,b,c):
+	''' Solves the  equation ax + b = c '''
 	if a == 0:
 		return None
 	return (c-b)/a
 
 def format_number(n):
+	''' Formats numbers, removes .0 or rounds to 2 decimals '''
 	return str(int(n)) if n.is_integer() else f'{n:.2f}'
 
 def main():
+	''' Main program loop for solving linear equation '''
 	print('Solve equation ax + b = c')
 	print('-----------------------------------')
 
@@ -47,7 +53,7 @@ def main():
 
 			x = solve_equation(a,b,c)
 
-			if x == None:
+			if x is None:
 				print('a can\'t be zero !')
 				continue
 
@@ -59,6 +65,12 @@ def main():
 				print(f'x={int(x)}')
 			else:
 				print(f'x={x:.2f}')
+
+			again = input('Do you want to solve another equation? (yes/no)').strip().lower()
+			if again != 'yes':
+				print('Goodby')
+				break
+				
 		except ValueError:
 			print('Insert only numbers not letters !')
 if __name__ == '__main__':
