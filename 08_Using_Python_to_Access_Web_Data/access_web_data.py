@@ -1,12 +1,12 @@
-''' Extracting Data'''
+''' REGULAR EXPRESSIONS'''
 
-import re
-hand = open('mbox-short.txt')
-for line in hand:
-	line = line.rstrip()
+# import re
+# hand = open('mbox-short.txt')
+# for line in hand:
+# 	line = line.rstrip()
 
-	if re.search('ˆFrom:', line):
-		print(line)
+# 	if re.search('ˆFrom:', line):
+# 		print(line)
 
 #-----------------
 
@@ -14,67 +14,67 @@ for line in hand:
 
 # ex:
 
-import re 
-x = 'My favorite 2 numbers are 19 and 42'
-y = re.findall('[0-9]+', x)
-print(y)
+# import re 
+# x = 'My favorite 2 numbers are 19 and 42'
+# y = re.findall('[0-9]+', x)
+# print(y)
 
 #----------------
 # ex:
 #Greedy Matching
 
-import re
-x = 'From: Using the : character'
-y = re.findall('^F.+?:', x) # starting with F, (.+)-any caracter, (?)-don't be greedy(not greedy prefer the shortest)
-y = re.findall('^F.+:', x) # starting with F, (.+) any caracter and be greedy(be greedy prefer the longest)
-print(y)
+# import re
+# x = 'From: Using the : character'
+# y = re.findall('^F.+?:', x) # starting with F, (.+)-any caracter, (?)-don't be greedy(not greedy prefer the shortest)
+# y = re.findall('^F.+:', x) # starting with F, (.+) any caracter and be greedy(be greedy prefer the longest)
+# print(y)
 
 #--------------------------------------
 
 # ex:
 # Fine-Tuning String Extraction
 
-import re
-file = input('insert file name:')
-if len(file) < 3:
-	file = 'mbox-short.txt'
+# import re
+# file = input('insert file name:')
+# if len(file) < 3:
+# 	file = 'mbox-short.txt'
 
-filename = open(file)
+# filename = open(file)
 
-for y in filename:
-	if not y.startswith('From '):
-		continue
-	y = y.strip()
-	# print(y)
-	y = re.findall(r'^From (\S+@\S+)', y) # The r tells Python: “Treat this string literally — don’t interpret \S as an escape sequence.”
-	print(y)
+# for y in filename:
+# 	if not y.startswith('From '):
+# 		continue
+# 	y = y.strip()
+# 	# print(y)
+# 	y = re.findall(r'^From (\S+@\S+)', y) # The r tells Python: “Treat this string literally — don’t interpret \S as an escape sequence.”
+# 	print(y)
 
 #-------------------------------------
 
 ''' The Double Split Pattern --> The Regex Version '''
 
 # ex:
-import re
+# import re
 
-file = input('insert file name:')
-if len(file) < 3:
-	file = 'mbox-short.txt'
-
-
-filename = open(file)
+# file = input('insert file name:')
+# if len(file) < 3:
+# 	file = 'mbox-short.txt'
 
 
+# filename = open(file)
 
-for line in filename:
-	if not line.startswith('From '):
-		continue
 
-	line = line.rstrip()
+
+# for line in filename:
+# 	if not line.startswith('From '):
+# 		continue
+
+# 	line = line.rstrip()
 	
-	# print(line)
+# 	print(line)
 
-	word = re.findall(r'@([^ ]*)', line)
-	print(word)
+	# word = re.findall(r'@([^ ]*)', line)
+	# print(word)
 
 r'''
 
@@ -99,6 +99,41 @@ $        Matches the end of the line
 
 
  '''
+
+#-----------------------------
+
+# From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008
+
+import re
+a = 'From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008'
+b = (re.findall(r'09([^ ])1', a))
+print(b)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
