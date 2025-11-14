@@ -84,7 +84,7 @@ Python Regular Expression Quick Guide
 $        Matches the end of the line
 .        Matches any character
 \s       Matches whitespace
-\S       Matches any non-whitespace character
+\S       Matches any non-whitespace character (non blanck character)
 *        Repeats a character zero or more times
 *?       Repeats a character zero or more times 
          (non-greedy)
@@ -105,13 +105,30 @@ $        Matches the end of the line
 # From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008
 
 import re
-a = 'From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008'
-b = (re.findall(r'09([^ ])1', a))
+a = 'From: Eala 3b, 2008 bEiBI: cOrVUsE:'
+# a = 'From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008'
+b = (re.findall(r', ([^ ]+)', a))
 print(b)
 
 
 
 
+
+
+#--------   
+#exemple:
+
+'''
+Index:     0   1   2   3   4   5   6   7   8   9   10   11   12
+Char:          a   b   c   1   2   3   x   y   z    4    5  
+Match:     ''  ''  ''  ''  '123'       ''  ''  ''   '45'  ''   ''
+''' 
+#------------------
+# index 	 0  1   2  3  4  5  6  7  8
+# Char   	    x   7  y  8  9  z
+# Match:  '' ''  '' '' '' '' '' '' ''
+
+# we get--> ['', '7', '', '89', '', '' ]
 
 
 
