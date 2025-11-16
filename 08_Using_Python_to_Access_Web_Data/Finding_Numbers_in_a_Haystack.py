@@ -35,7 +35,7 @@ The basic outline of this problem is to read the file, look for integers using t
 
 
 #---------------------------------------
-For file: 'regex_sum_42.txt' we have:
+#For file: 'regex_sum_42.txt' we have:
 
 
 import re 
