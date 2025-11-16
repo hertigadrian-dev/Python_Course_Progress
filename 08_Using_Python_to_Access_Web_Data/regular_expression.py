@@ -30,19 +30,16 @@ file = input('insert file name:')
 if len(file) < 3:
 	file = 'mbox-short.txt'
 
+
 filename = open(file)
 
 adri = list()
-
 for line in filename:
 	line = line.rstrip()
-
-	extract = re.findall(r'^X-DSPAM-Confidence: ([0-9.]+)', line)
-	if len(extract) != 1:
+	nr = re.findall(r'^X-DSPAM-Confidence: ([0-9.]+)', line)
+	if len(nr) != 1:
 		continue
-	# print(extract)
-	num = float(extract[0])
-	
-	adri.append(num)
+	numb = float(nr[0])
+	adri.append(numb)
 print(max(adri))
 
