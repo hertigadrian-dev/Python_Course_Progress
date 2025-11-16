@@ -35,27 +35,27 @@ The basic outline of this problem is to read the file, look for integers using t
 
 
 #---------------------------------------
-# For file: 'regex_sum_42.txt' we have:
+For file: 'regex_sum_42.txt' we have:
 
 
-# import re 
+import re 
 
-# file = input('insert file name:')
-# if len(file) < 3:
-# 	file = 'regex_sum_42.txt'
-# filename = open(file)
+file = input('insert file name:')
+if len(file) < 3:
+	file = 'regex_sum_42.txt'
+filename = open(file)
 
-# adri = list()
+adri = list()
 
-# total = 0
+total = 0
 
-# for line in filename:
-#   	line = line.rstrip()
-#   	extr = re.findall(r'\d+', line)
-#   	for num in extr:
-#   		total += int(num)
+for line in filename:
+  	line = line.rstrip()
+  	extr = re.findall(r'\d+', line)
+  	for num in extr:
+  		total += int(num)
 
-# print(total)
+print(total)
 
 #----------------------------------------
 # For file name: 'regex_sum_2311578.txt' we have:
