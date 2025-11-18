@@ -16,56 +16,50 @@
 
 
 
-# import socket 
+import socket 
 
-# canal = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# canal.connect(('data.pr4e.org', 80))
-
-
-# cmd = (
-# 	'GET /romeo.txt HTTP/1.1\r\n'
-# 	'Host: data.pr4e.org\r\n' 
-# 	'Connection: close\r\n'
-# 	'\r\n'
-
-# ).encode()
-
-# canal.send(cmd)
-
-# while True:
-# 	data = canal.recv(1000)
-# 	if len(data) < 1:
-# 		break
-# 	print(data.decode())
-
-# canal.close()
-
-# import requests
-
-# url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur,gbp"
-# data = requests.get(url).json()
-
-# print("USD:", data["bitcoin"]["usd"])
-# print("EUR:", data["bitcoin"]["eur"])
-# print("GBP:", data["bitcoin"]["gbp"])
+canal = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+canal.connect(('data.pr4e.org', 80))
 
 
+cmd = (
+	'GET /romeo.txt HTTP/1.1\r\n'
+	'Host: data.pr4e.org\r\n' 
+	'Connection: close\r\n'
+	'\r\n'
 
-import requests
+).encode()
 
-url = "https://api.coingecko.com/api/v3/simple/price"
-params = {
-    "ids": "bitcoin",
-    "vs_currencies": "usd,eur,gbp"
-}
+canal.send(cmd)
 
-response = requests.get(url, params=params)
-data = response.json()
+while True:
+	data = canal.recv(1000)
+	if len(data) < 1:
+		break
+	print(data.decode())
 
-print("Bitcoin Price:")
-print(f"USD: ${data['bitcoin']['usd']}")
-print(f"EUR: €{data['bitcoin']['eur']}")
-print(f"GBP: £{data['bitcoin']['gbp']}")
+canal.close()
+
+#---------------------------
+
+import socket 
+
+canal = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # I am creating a network connection pipe using IPv4 and TCP
+canal.connect(('data.pr4e.org', 80)) # opens a TCP connection to Hostname: data.pr4e.org and Port: 80
+
+cmd = (
+	'GET /romeo.txt HTTP/1.1\r\n'
+	'Host: data.pr4e.org\r\n'
+	'Connection: close\r\n'
+	'\r\n'
+	).encode()
+
+canal.send(cmd)
+
+
+
+
+
 
 
 
