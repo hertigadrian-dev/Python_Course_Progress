@@ -51,7 +51,7 @@ if result != 0:
 	exit()
 
 my_request = (
-	'GET /page1.html HTTP/1.1\r\n'
+	'GET /romeo.txt HTTP/1.1\r\n'
 	'Host: data.pr4e.org\r\n'
 	'Connection: close\r\n'
 	'\r\n'
