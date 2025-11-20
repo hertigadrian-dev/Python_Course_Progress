@@ -28,11 +28,28 @@
 ''' Shorter version '''
 '''   No Headers   ''' 
 #------------------------
+#ex.1
+# import socket 
+# import urllib.request, urllib.parse, urllib.error
 
+# fhand = urllib.request.urlopen('http://data.pr4e.org/romeo.txt')
+# for line in fhand:
+# 	print(line.decode().strip())
+
+#ex.2
 import socket 
 import urllib.request, urllib.parse, urllib.error
 
 fhand = urllib.request.urlopen('http://data.pr4e.org/romeo.txt')
+adri = {}
 for line in fhand:
-	print(line.decode().strip())
+	words = line.decode().split()
+	for stuff in words:
+		adri[stuff] = adri.get(stuff, 0) + 1
+print(max(adri))
+
+
+
+
+
 
