@@ -33,7 +33,7 @@ for line in filename:
 
 	line = line.strip()
 	line = line.split()
-	
+	# print(line)
 	hour = line[5] #.split(':')[0]
 	first = hour.split(':')
 	second = first[0]

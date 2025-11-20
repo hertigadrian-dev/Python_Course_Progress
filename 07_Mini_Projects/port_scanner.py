@@ -118,131 +118,131 @@
 ''' IP and PORT scanner '''
 
 
-# import socket
-# import subprocess
-# import threading
+import socket
+import subprocess
+import threading
 
-# # ------------------------------
-# # 1. Find active IPs on the network
-# # ------------------------------
+# ------------------------------
+# 1. Find active IPs on the network
+# ------------------------------
 
-# def ping(ip):
-#     # Works on macOS/Linux (-c 1), Windows users use (-n 1)
-#     command = ["ping", "-c", "1", ip]
-#     result = subprocess.run(command, stdout=subprocess.DEVNULL)
-#     if result.returncode == 0:
-#         print(f"[+] Active IP found: {ip}")
-#         active_ips.append(ip)
-
-
-# # ------------------------------
-# # 2. Scan ports on each active IP
-# # ------------------------------
-
-# def scan_port(ip, port):
-#     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#     sock.settimeout(0.5)
-#     if sock.connect_ex((ip, port)) == 0:
-#         print(f"    → Port {port} OPEN on {ip}")
-#     sock.close()
+def ping(ip):
+    # Works on macOS/Linux (-c 1), Windows users use (-n 1)
+    command = ["ping", "-c", "1", ip]
+    result = subprocess.run(command, stdout=subprocess.DEVNULL)
+    if result.returncode == 0:
+        print(f"[+] Active IP found: {ip}")
+        active_ips.append(ip)
 
 
-# # ------------------------------
-# # Start Scanning
-# # ------------------------------
+# ------------------------------
+# 2. Scan ports on each active IP
+# ------------------------------
 
-# active_ips = []
+def scan_port(ip, port):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(0.5)
+    if sock.connect_ex((ip, port)) == 0:
+        print(f"    → Port {port} OPEN on {ip}")
+    sock.close()
 
-# # Change this to match your network (e.g., 192.168.1.* or 10.0.0.*)
-# network_prefix = "192.168.1."
 
-# print("[*] Scanning for active devices...")
+# ------------------------------
+# Start Scanning
+# ------------------------------
 
-# threads = []
+active_ips = []
 
-# for i in range(1, 255):
-#     ip = network_prefix + str(i)
-#     t = threading.Thread(target=ping, args=(ip,))
-#     t.start()
-#     threads.append(t)
+# Change this to match your network (e.g., 192.168.1.* or 10.0.0.*)
+network_prefix = "192.168.1."
 
-# for t in threads:
-#     t.join()
+print("[*] Scanning for active devices...")
 
-# print("\n[*] Starting port scan on active IPs...")
-# ports_to_scan = range(1, 65535)
+threads = []
 
-# for ip in active_ips:
-#     print(f"\nScanning {ip}...")
-#     for port in ports_to_scan:
-#         scan_port(ip, port)
+for i in range(1, 255):
+    ip = network_prefix + str(i)
+    t = threading.Thread(target=ping, args=(ip,))
+    t.start()
+    threads.append(t)
+
+for t in threads:
+    t.join()
+
+print("\n[*] Starting port scan on active IPs...")
+ports_to_scan = range(1, 65535)
+
+for ip in active_ips:
+    print(f"\nScanning {ip}...")
+    for port in ports_to_scan:
+        scan_port(ip, port)
 #-------------------------------------
 
 
-from scapy.all import ARP, Ether, srp
-from mac_vendor_lookup import MacLookup
-import socket
+# from scapy.all import ARP, Ether, srp
+# from mac_vendor_lookup import MacLookup
+# import socket
 
-# ------------------------------
-# Scan local network for IP + MAC
-# ------------------------------
+# # ------------------------------
+# # Scan local network for IP + MAC
+# # ------------------------------
 
-def scan_network(network_prefix="192.168.1.0/24"):
-    print("[*] Scanning network for devices...")
-    arp = ARP(pdst=network_prefix)
-    ether = Ether(dst="ff:ff:ff:ff:ff:ff")
-    packet = ether/arp
+# def scan_network(network_prefix="192.168.1.0/24"):
+#     print("[*] Scanning network for devices...")
+#     arp = ARP(pdst=network_prefix)
+#     ether = Ether(dst="ff:ff:ff:ff:ff:ff")
+#     packet = ether/arp
 
-    result = srp(packet, timeout=2, verbose=0)[0]
+#     result = srp(packet, timeout=2, verbose=0)[0]
 
-    devices = []
+#     devices = []
 
-    for sent, received in result:
-        try:
-            vendor = MacLookup().lookup(received.hwsrc)
-        except:
-            vendor = "Unknown Manufacturer"
+#     for sent, received in result:
+#         try:
+#             vendor = MacLookup().lookup(received.hwsrc)
+#         except:
+#             vendor = "Unknown Manufacturer"
 
-        devices.append({
-            "ip": received.psrc,
-            "mac": received.hwsrc,
-            "vendor": vendor
-        })
+#         devices.append({
+#             "ip": received.psrc,
+#             "mac": received.hwsrc,
+#             "vendor": vendor
+#         })
 
-    return devices
+#     return devices
 
-# ------------------------------
-# Port scanner
-# ------------------------------
+# # ------------------------------
+# # Port scanner
+# # ------------------------------
 
-def scan_ports(ip, ports=[22, 80, 443, 8080, 631]):
-    print(f"\nScanning ports on {ip}...")
-    open_ports = []
-    for port in ports:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(0.4)
-        result = sock.connect_ex((ip, port))
-        if result == 0:
-            open_ports.append(port)
-        sock.close()
-    return open_ports
+# def scan_ports(ip, ports=[22, 80, 443, 8080, 631]):
+#     print(f"\nScanning ports on {ip}...")
+#     open_ports = []
+#     for port in ports:
+#         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#         sock.settimeout(0.4)
+#         result = sock.connect_ex((ip, port))
+#         if result == 0:
+#             open_ports.append(port)
+#         sock.close()
+#     return open_ports
 
-# ------------------------------
-# Main
-# ------------------------------
+# # ------------------------------
+# # Main
+# # ------------------------------
 
-devices = scan_network("192.168.1.0/24")
+# devices = scan_network("192.168.1.0/24")
 
-print("\n=== Devices Found on Network ===")
-for d in devices:
-    print(f"IP: {d['ip']}\nMAC: {d['mac']}\nVendor: {d['vendor']}\n")
+# print("\n=== Devices Found on Network ===")
+# for d in devices:
+#     print(f"IP: {d['ip']}\nMAC: {d['mac']}\nVendor: {d['vendor']}\n")
 
-print("\n=== Port Scan ===")
-for d in devices:
-    ports = scan_ports(d["ip"])
-    if ports:
-        print(f"{d['ip']} ({d['vendor']}) → Open Ports: {ports}")
-    else:
-        print(f"{d['ip']} ({d['vendor']}) → No common open ports found.")
+# print("\n=== Port Scan ===")
+# for d in devices:
+#     ports = scan_ports(d["ip"])
+#     if ports:
+#         print(f"{d['ip']} ({d['vendor']}) → Open Ports: {ports}")
+#     else:
+#         print(f"{d['ip']} ({d['vendor']}) → No common open ports found.")
 
 

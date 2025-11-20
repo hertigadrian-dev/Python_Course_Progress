@@ -42,12 +42,13 @@
 
 # #---------------------------
 
-import socket 
+import socket
 
 phone = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 result = phone.connect_ex(('data.pr4e.org', 80))
+
 if result != 0:
-	print('connection error, error code:', result)
+	print('connection failed, error code:', result)
 	exit()
 
 my_request = (
@@ -58,12 +59,23 @@ my_request = (
 	).encode()
 phone.send(my_request)
 
+
 while True:
 	data = phone.recv(500)
 	if len(data) < 1:
 		break
 	print(data.decode())
 phone.close()
+
+
+
+
+
+
+
+
+
+
 
 
 
