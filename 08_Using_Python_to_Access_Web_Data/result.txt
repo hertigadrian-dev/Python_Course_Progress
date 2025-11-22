@@ -1,0 +1,7 @@
+word counting
+--------------
+
+light: 1
+east: 1
+and: 1
+sick: 1
