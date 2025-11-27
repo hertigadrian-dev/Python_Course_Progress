@@ -12,36 +12,81 @@ lets us extract it automatically for analysis, automation, or building applicati
 
 #--------------------------
 
+# import urllib.request, urllib.parse, urllib.error
+# from bs4 import BeautifulSoup
+
+# import ssl
+
+# # ignore SSL certificate errors
+# ctx = ssl._create_unverified_context()
+
+
+# url = input('enter url: ')
+# try:
+# 	html = urllib.request.urlopen(url, context=ctx).read()
+# except:
+# 	print('invalid url or connection problem!')
+# 	quit()
+
+# soup = BeautifulSoup(html, 'html.parser')
+
+# # retrive all the anchor tags
+
+# tags = soup.find_all('a')
+
+# for ceva in tags:
+# 	word = (ceva.get('href', None))
+# 	if not word.startswith('https'):
+# 		continue
+
+# 	word1 = word.split('//')[1]
+	
+# 	print(word1)
+
+#-----------------------------
+
+
 import urllib.request, urllib.parse, urllib.error
+import ssl
 from bs4 import BeautifulSoup
 
-import ssl
-
-# ignore SSL certificate errors
 ctx = ssl._create_unverified_context()
 
+url = input('insert url:')
 
-url = input('enter url: ')
 try:
 	html = urllib.request.urlopen(url, context=ctx).read()
 except:
-	print('invalid url or connection problem!')
+	print('invalid url')
 	quit()
 
-soup = BeautifulSoup(html, 'html.parser')
+adi = BeautifulSoup(html, 'html.parser')
 
-# retrive all the anchor tags
+tag = adi.find_all('a')
 
-tags = soup.find_all('a')
-
-for ceva in tags:
-	word = (ceva.get('href', None))
-	if not word.startswith('https'):
+for ceva in tag:
+	word = ceva.get('href')
+	if word is None or word.startswith(('#', 'mailto', 'javascript:')):
 		continue
+	if word.startswith('/'):
+		word = url + word
+	print(word)
 
-	word1 = word.split('//')[1]
+
+
+
+
+
+
+
+
 	
-	print(word1)
+#----------------------------
+# better version
+#---------------
+
+
+
 
 
 
