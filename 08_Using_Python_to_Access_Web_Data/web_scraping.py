@@ -73,9 +73,9 @@ for ceva in tag:
 		continue
 	if word.startswith('#'):
 		continue
-	if word.startswith('javascript'):
+	if word.startswith('javascript:'):
 		continue
-	if word.startswith('mailto'):
+	if word.startswith('mailto:'):
 		continue
 	# print(word)
 	if word.startswith('/'):
@@ -87,7 +87,7 @@ for ceva in tag:
 	word1 = word.strip()
 	word2 = word1.split('/')
 
-	word2 = [x for x in word2 if x]
+	word2 = [x for x in word2 if x][1]
 	
 	print(word2) 
 
