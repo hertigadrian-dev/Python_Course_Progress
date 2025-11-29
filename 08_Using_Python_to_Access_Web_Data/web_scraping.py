@@ -52,7 +52,9 @@ from bs4 import BeautifulSoup
 
 ctx = ssl._create_unverified_context()
 
-url = input('insert url:')
+url = input('insert url: ') or 'http://www.dr-chuck.com'
+
+
 
 try:
 	html = urllib.request.urlopen(url, context=ctx).read()
@@ -60,19 +62,34 @@ except:
 	print('invalid url')
 	quit()
 
-adi = BeautifulSoup(html, 'html.parser')
 
-tag = adi.find_all('a')
+soup = BeautifulSoup(html, 'html.parser')
+
+tag = soup.find_all('a')
 
 for ceva in tag:
 	word = ceva.get('href')
-	if word is None or word.startswith(('#', 'mailto', 'javascript:')):
+	if word is None:
 		continue
+	if word.startswith('#'):
+		continue
+	if word.startswith('javascript'):
+		continue
+	if word.startswith('mailto'):
+		continue
+	# print(word)
 	if word.startswith('/'):
 		word = url + word
-	print(word)
 
+	if not word.startswith('http'):
+		continue
 
+	word1 = word.strip()
+	word2 = word1.split('/')
+
+	word2 = [x for x in word2 if x]
+	
+	print(word2) 
 
 
 
@@ -81,9 +98,7 @@ for ceva in tag:
 
 
 	
-#----------------------------
-# better version
-#---------------
+
 
 
 
